@@ -5,6 +5,46 @@
 >
 > The event is fired on PowerPoint on Windows.
 
+## Installing the macro file
+
+Use Microsoft PowerPoint for Mac, choose **Tools** > **PowerPoint Add-ins...** dialog
+to add the compiled `PresentationCloseFinalAddin.ppam` file to the application.
+
+
+## Bug report
+
+The macro file is an addin which can be added to the Microsoft PowerPoint app
+on Windows or on Mac.
+
+The macro sets handlers for various events in the presentation lifecycle:
+
+* `PresentationBeforeClose`
+* `PresentationClose`
+* `PresentationCloseFinal`
+
+When user closes the presentation document, PowerPoint will fire the `PresentationClose`
+event. When document is unsaved, PowerPoint will display a dialog box to save the file
+after this event handler code was executed.
+
+If user choses to cancel the save file dialog box, the presentation will still be opened
+and user can work with it. This makes the `PresentationClose` unsuitable to clean up
+resources.
+
+The PowerPoint 2010 on Windows added new event `PresentationCloseFinal` which is called
+if the presentation document is really closed.
+
+It is the right event to clean up any unmaganed resources the macro or add-in may be
+working with.
+
+
+### Expected behavior
+
+The `PresentationCloseFinal` should be fired on PowerPoint on macOS at the same
+point when Windows version of PowerPoint does it.
+
+### Actual behavior
+
+The `PresentationCloseFinal` is never fired on PowerPoint on macOS.
 
 
 ## References
