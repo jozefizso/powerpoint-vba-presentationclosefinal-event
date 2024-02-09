@@ -47,6 +47,24 @@ point when Windows version of PowerPoint does it.
 The `PresentationCloseFinal` is never fired on PowerPoint on macOS.
 
 
+## Compiling the source code
+
+1. Install [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download)
+2. Install [vbamc](https://www.nuget.org/packages/vbamc) tool
+3. Compile addin with `make`
+
+```shell
+brew install make
+brew install --cask dotnet-sdk
+dotnet tool install --global vbamc
+
+cd src
+make
+```
+
+The compiled `PresentationCloseFinalAddin.ppam` file will be in the `src/bin` directory.
+
+
 ## References
 
 > You probably want PresentationBeforeClose or PresentationCloseFinal which was added in PowerPoint 2010.
